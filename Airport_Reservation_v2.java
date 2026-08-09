@@ -1,4 +1,3 @@
-```java
 import java.util.Scanner;
 
 public class Airport_Reservation{
@@ -357,4 +356,3 @@ public class Airport_Reservation{
    
     }
 }
-```
