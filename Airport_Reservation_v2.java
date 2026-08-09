@@ -1,6 +1,7 @@
+```java
 import java.util.Scanner;
 
-public class Airport_Reservation_v2{
+public class Airport_Reservation{
     public static void main(String[] args){
         //declare Scanner
         Scanner input = new Scanner(System.in);
@@ -45,6 +46,7 @@ public class Airport_Reservation_v2{
             check1 = (input1 == 1) ? true : (input1 == 0) ? true : false;
             specneeds = (input1 == 1) ? true : (input1 == 0) ? false : false;
             
+            //check1 validates the input while specneeds stores the actual true/false meaning of the answer
             if (!check1){
                 System.out.println(comres);
                 System.out.print("Special Needs? 0/1            :       ");
@@ -52,9 +54,11 @@ public class Airport_Reservation_v2{
             }    
         }
 
+        //nextInt() leaves the Enter key in the input buffer, so nextLine() clears it before reading names
         input.nextLine();
 
         String[] names = new String[num_people];
+        //array size depends on the number of reservees entered earlier
         for (int i = 0; i < num_people; i++){
           System.out.print("Enter Name " + (i + 1) + "                  :       ");
           names[i] = input.nextLine();
@@ -80,6 +84,7 @@ public class Airport_Reservation_v2{
         input2b = input.nextInt();
 
         while (!check2b){
+            //input2b determines both the displayed ticket type and whether the round-trip discount will be applied
             twowaytype =
                 (input2b == 1) ? "One Way Ticket" : 
                 (input2b == 2) ? "Round Trip" :
@@ -87,6 +92,7 @@ public class Airport_Reservation_v2{
             check2b = 
                 (input2b == 1 || input2b == 2) ? true : 
                 false;
+            //true means the selected ticket is round trip; false means one way or invalid input
             twowayboolean = 
                 (input2b == 1) ? false : 
                 (input2b == 2) ? true :
@@ -99,20 +105,22 @@ public class Airport_Reservation_v2{
         }
 
         System.out.println("\nDeparting From:       ");
-        System.out.println("1. China\n2. Japan\n3. Canada\n4. Bicol\n5. Cebu ");
+        System.out.println("1. China\n2. Japan\n3. Canada\n4. Bicol\n5. Cebu\n6. Manila");
         System.out.print("Enter Number                  :       ");
         input2a = input.nextInt();
         
         while (!check2a){
+            //input2a is kept as a number for validation while "from" stores the readable location name
             from =
                 (input2a == 1) ? "China" : 
                 (input2a == 2) ? "Japan" :
                 (input2a == 3) ? "Canada" :
                 (input2a == 4) ? "Bicol" :
                 (input2a == 5) ? "Cebu" :
+                (input2a == 6) ? "Manila" :
                 "mikael";
             check2a = 
-                (input2a >= 1 && input2a <= 5) ? true : 
+                (input2a >= 1 && input2a <= 6) ? true : 
                 false;
             if (!check2a){
                 System.out.println(comres);
@@ -122,25 +130,30 @@ public class Airport_Reservation_v2{
         }
         
         System.out.println("\nSelect Destination:");
-        System.out.println("1. China\n2. Japan\n3. Canada\n4. Bicol\n5. Cebu");
+        System.out.println("1. China\n2. Japan\n3. Canada\n4. Bicol\n5. Cebu\n6. Manila");
         System.out.print("Enter Number                  :       ");
         input2 = input.nextInt();
         
         while (!check2){
+            //destination uses the same location numbers as the departure menu
             destination = 
                 (input2 == 1) ? "China" : 
                 (input2 == 2) ? "Japan" :
                 (input2 == 3) ? "Canada" :
                 (input2 == 4) ? "Bicol" :
                 (input2 == 5) ? "Cebu" :
+                (input2 == 6) ? "Manila" :
                 "seibel";
+            //destination must be a valid location and must not be the same as the departure location
             check2 = 
-                (input2 >= 1 && input2 <= 5 && input2 != input2a) ? true : 
+                ((input2 >= 1 && input2 <= 6) && input2 != input2a) ? true : 
                 false;
+            //local becomes true only when both departure and destination are domestic locations
             local = 
-                ((input2a >=1 && input2a <= 3) && (input2 == 4 || input2 == 5)) ? false :
-                ((input2a == 4 || input2a == 5) && (input2a == 4 || input2a == 5)) ? true :
+                ((input2a >=1 && input2a <= 3) && (input2 == 4 || input2 == 5 || input2a == 6)) ? false :
+                ((input2 == 4 || input2 == 5 || input2 == 6) && (input2a == 4 || input2a == 5 || input2a == 6)) ? true :
                 false;
+            //the input is requested again if it is invalid or if the destination matches the departure
             if (!check2 || input2 == input2a){
               System.out.println(comres);
               System.out.print("Enter Number                  :       ");
@@ -160,6 +173,7 @@ public class Airport_Reservation_v2{
         input3 = input.nextInt();
         
         while (!check3){
+            //input3 determines the flight class while "type" stores the corresponding display text
             type =
                 (input3 == 1) ? "First Class      " : 
                 (input3 == 2) ? "Business Class      " :
@@ -184,13 +198,14 @@ public class Airport_Reservation_v2{
         check4 = false;
         check5 = false;
         pets = false;
-        num_pet = 0;
+        num_pet = 0;                                                    //default value prevents pet charges when no pets are selected
         
         System.out.println("\nExtra Charges:");
         System.out.print("Travel Insurance? 0/1         :       ");
         input4 = input.nextInt();
         
         while (!check4){
+            //check4 validates the 0/1 input while insurance stores the selected option
             check4 = (input4 == 1) ? true : (input4 == 0) ? true : false;
             insurance = (input4 == 1) ? true : (input4 == 0) ? false : false;
             
@@ -207,17 +222,20 @@ public class Airport_Reservation_v2{
         input5 = input.nextInt();
         
         while (!check5){
+            //pets stores whether a pet charge should be calculated later
             check5 = (input5 == 1) ? true : (input5 == 0) ? true : false;
             pets = (input5 == 1) ? true : (input5 == 0) ? false : false;
             
             if (!check5){
                 System.out.println(comres);
+                System.out.print("Invalid Answer!");             //the original code uses comres for other validation messages
                 System.out.print("With Pets? 0/1                :       ");
                 input5 = input.nextInt();
             }    
         }
         
         if (pets){
+            //num_pet remains 0 when pets are not selected, which makes pet_pay equal to 0 later
             System.out.print("Enter # of Pets               :       ");
             num_pet = input.nextInt();
         }
@@ -225,6 +243,7 @@ public class Airport_Reservation_v2{
         //ticket price
         double ticket_price;
         ticket_price = 0;
+        //ticket price depends on two conditions: selected class and whether the flight is local or international
         ticket_price = 
             (input3 == 1 && local) ? 60000 :                        //check if first class and local
             (input3 == 2 && local) ? 35000 :                        //if business and local
@@ -237,6 +256,7 @@ public class Airport_Reservation_v2{
             0;
 
         //get total ticket price based on ticket type
+        //round trip receives a 20% discount before the price is multiplied by the number of reservees
         double twowaypay = 
             twowayboolean ? (ticket_price - (ticket_price * 0.2)) :               //20% discount if two way pay ticket is bought 
             !twowayboolean ? (ticket_price) :
@@ -257,15 +277,18 @@ public class Airport_Reservation_v2{
         double baggage = weight * 500;
         
         //airport tax 
+        //tax is calculated separately because it is displayed separately in the receipt
         double tax = ticket_price * 0.05;
         
         //pet fee
         double pet_pay = num_pet * 1000;
         
         //total ticket
+        //individual ticket price is multiplied by the number of reservees to get the combined ticket cost
         double total_ticket = twowaypay * num_people;        
         
         //total charges
+        //all applicable charges are combined here to produce the final reservation cost
         double total = total_ticket + insurance_pay + service + baggage + pet_pay;
         
         //local or international
@@ -279,6 +302,7 @@ public class Airport_Reservation_v2{
         }
         
         //terminal system using arrays and math random
+        //separate arrays are used for the terminal letter and terminal number
         String[] terminal_char = {"A","B","C","D"};
         String[] terminal_num = {"1","2","3","4"};
         
@@ -292,6 +316,7 @@ public class Airport_Reservation_v2{
         System.out.println("Number of Reservee          :       " + num_people);
         System.out.println("Special Needs?              :       " + specneeds);
         
+        //loop displays every passenger name stored in the names array
         for (int i = 0; i < num_people; i++){
           System.out.println("Reservee Name " + (i + 1) + "             :       " + names[i]);
         }
@@ -326,7 +351,10 @@ public class Airport_Reservation_v2{
         System.out.println("Total Charge                :       " + total);
         System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = ");
         System.out.println();
+        
+        //randomly selects a terminal letter and terminal number for the passenger's departure
         System.out.println("Wait for departure at Terminal " + terminal_char[(int) (Math.random() * 4)] + terminal_num[(int) (Math.random() * 4)] + ".");
    
     }
 }
+```
