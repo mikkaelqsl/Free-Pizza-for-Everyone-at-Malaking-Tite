@@ -1,9 +1,11 @@
+```java
 import java.util.Scanner;
 public class GradeCalculator {
     public static void main(String[] args) {
       Scanner input = new Scanner(System.in);
 
       //get input for grades
+      //each subject has three separate term grades which will later be averaged into one final grade
       double lcs1, lcs2, lcs3, k1, k2, k3, gm1, gm2, gm3, gs1, gs2, gs3, c1, c2, c3, cp1, cp2, cp3, ec1, ec2, ec3, mk1, mk2, mk3;
 
       System.out.println("Student Average Scanner\n");
@@ -57,6 +59,7 @@ public class GradeCalculator {
       mk3 = input.nextDouble();
 
       //process informartions and compute
+      //final grade for each subject is calculated by getting the average of its three terms
       double lcsf, kf, gmf, gsf, cf, cpf, ecf, mkf;
 
       lcsf = (lcs1 + lcs2 + lcs3)/3;
@@ -68,15 +71,20 @@ public class GradeCalculator {
       cf = (c1 + c2 + c3)/3;
       cpf = (cp1 + cp2 + cp3)/3;
 
-      double  ga = (lcsf + kf + gmf + gsf + ecf + mkf)/6;
+      //general average uses the eight subjects included in this calculation
+      double  ga = (lcsf + kf + gmf + gsf + ecf + mkf + cf + cpf)/8;
 
+      //test variables are used to store the result of each condition as true or false
       boolean test1, test2, test3;
+      //checks whether the general average reaches the required minimum of 75
       test1 = (ga >= 75); 
+      //checks whether the Computer Programming final grade reaches the required minimum of 90
       test2 = (cpf >= 90);
+      //both conditions must be true for test3 to become true
       test3 = test1 && test2;
 
       //display output
-      System.out.println("\nSubejct Final Grades:");
+      System.out.println("\nSubject Final Grades:");
       System.out.println("= = = = = = = = = = = = = = = = = = = = = =");
       System.out.println("LCS Final Grade              :   " + lcsf);
       System.out.println("Kasaysayan Final Grade       :   " + kf);
@@ -96,3 +104,4 @@ public class GradeCalculator {
 
     }
 }
+```
